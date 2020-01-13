@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux'
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import './App.css';
 import Login from "./components/Login/Login"
-import { connect } from 'react-redux'
 import { handleInitialUsers } from './actions/shared'
 import Dashboard from './components/Dashboard/Dashboard';
 
@@ -11,12 +12,22 @@ class App extends Component {
   }
   render() {
     return (
-      <div className="App">
-        {this.props.authedUser === null
-          ? <Login />
-          : <Dashboard />
-        }
-      </div>
+      <Router>
+        <div className="App">
+          {
+            this.props.authedUser === null
+              ? <Route path='/' exact component={Login} />
+              : <Switch>
+                <Route path="/" exact component={Dashboard} />
+                <Route path='/questions/:question_id' component={null} /> {/*PollPage*/}
+                <Route path='/add' exact component={null} />
+                <Route path='/leaderboard' exact component={null} />
+                <Route component={null} /> {/*PageNotFound*/}
+              </Switch>
+          }
+        </div>
+      </Router>
+
     );
   }
 
