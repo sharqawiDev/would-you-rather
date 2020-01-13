@@ -4,6 +4,7 @@ import Login from "./components/Login/Login"
 import { connect } from 'react-redux'
 import { handleInitialData } from './actions/shared'
 import Header from './components/Header/Header';
+import Poll from './components/Poll/Poll';
 
 class App extends Component {
   componentDidMount() {
@@ -12,7 +13,7 @@ class App extends Component {
   render() {
     return (
       <div className="App" >
-        <Header />
+        <Poll />
       </div>
     );
   }

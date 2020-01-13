@@ -33,7 +33,7 @@ export default class Header extends Component {
                             height="30"
                             className="d-inline-block align-top"
                         />
-                        <Nav.Link href="#leaderboard">Logout</Nav.Link>
+                        <Nav.Link href="#logout">Logout</Nav.Link>
                     </Navbar.Collapse>
                 </Navbar>
             </div>
