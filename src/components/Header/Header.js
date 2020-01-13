@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Navbar, Nav } from 'react-bootstrap'
+import { Navbar, Nav, Image } from 'react-bootstrap'
 import { connect } from 'react-redux'
 class Header extends Component {
     render() {
@@ -23,17 +23,10 @@ class Header extends Component {
 
                     </Navbar.Collapse>
                     <Navbar.Collapse className="justify-content-end" variant="dark">
-                        <Navbar.Text>
+                        <Navbar.Text style={{ marginRight: "10px" }}>
                             {this.props.authedUser}
                         </Navbar.Text>
-                        {' '}
-                        <img
-                            alt="profile pic"
-                            src={require('./icon.png')}
-                            width="30"
-                            height="30"
-                            className="d-inline-block align-top"
-                        />
+                        <Image src={this.props.avatar} alt="profile pic" roundedCircle width="30px" />
                         <Nav.Link href="#logout">Logout</Nav.Link>
                     </Navbar.Collapse>
                 </Navbar>
@@ -42,9 +35,11 @@ class Header extends Component {
     }
 }
 
-function mapStateToProps({ authedUser }) {
+function mapStateToProps({ authedUser, users }) {
+    const avatar = users[authedUser]["avatarURL"]
     return {
         authedUser,
+        avatar
     }
 }
 
