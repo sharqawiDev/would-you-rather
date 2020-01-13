@@ -1,11 +1,22 @@
 import React, { Component } from 'react'
 import { Container, Row, Col, Jumbotron, Button, Form, Image } from "react-bootstrap"
-export default class Login extends Component {
+import { connect } from 'react-redux'
+import { setAuthedUser } from '../../actions/authedUser'
+class Login extends Component {
+
+    state = {
+        selectedUser: null
+    }
 
     authorizeUser = (event) => {
         event.preventDefault();
-        console.log(event.target)
+
+        const { selectedUser } = this.state
+        const { setAuthedUser } = this.props
+        setAuthedUser(selectedUser)
     }
+
+    changeSelectedUser = (selectedUser) => this.setState({ selectedUser })
 
     render() {
         const styles = {
@@ -22,7 +33,12 @@ export default class Login extends Component {
                 margin: "auto"
             }
         }
-        const path = require("./profile.png")
+
+        const { users } = this.props
+
+        const path = this.state.selectedUser === null
+            ? require("./profile.png")
+            : users[this.state.selectedUser]["avatarURL"]
         return (
             <Jumbotron style={styles.jumbotron}>
                 <Container>
@@ -37,11 +53,19 @@ export default class Login extends Component {
                             <Col>
                                 <Form.Group controlId="exampleForm.ControlSelect1">
                                     <Form.Label>Select a User to Login</Form.Label>
-                                    <Form.Control required as="select" defaultValue="">
+                                    <Form.Control
+                                        required as="select"
+                                        defaultValue=""
+                                        onChange={(e) => this.changeSelectedUser(e.target.value)}>
                                         <option value="" disabled >Select a User</option>
-                                        <option>1</option>
-                                        <option>2</option>
-                                        <option>3</option>
+                                        {
+                                            users
+                                                ? Object.keys(users).map(user =>
+                                                    <option key={user} value={user}>
+                                                        {user}
+                                                    </option>)
+                                                : null
+                                        }
                                     </Form.Control>
                                 </Form.Group>
                             </Col>
@@ -57,3 +81,19 @@ export default class Login extends Component {
         )
     }
 }
+
+function mapStateToProps({ users }) {
+    return {
+        ...users
+    }
+}
+
+function mapDispatchToProps(dispatch) {
+    return {
+        setAuthedUser: (id) => {
+            dispatch(setAuthedUser(id))
+        }
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Login)

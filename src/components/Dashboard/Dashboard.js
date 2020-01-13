@@ -10,7 +10,7 @@ class Dashboard extends Component {
     render() {
         return (
             <Container>
-                <Header></Header>
+                <Header />
                 <Row>
                     <Col style={{ margin: "10px" }}>
                         <ButtonGroup toggle onChange={this.handleChange}>
@@ -41,7 +41,7 @@ class Dashboard extends Component {
 function mapStateToProps({ questions }) {
     return {
         questionIds: Object.keys(questions)
-            .sort((a, b) => questions[b].timestamp - questions[a].timestamp)
+            .sort((a, b) => questions[b].timestamp - questions[a].timestamp),
     }
 }
 export default connect(mapStateToProps)(Dashboard)

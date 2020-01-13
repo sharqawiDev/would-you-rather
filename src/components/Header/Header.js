@@ -1,10 +1,11 @@
 import React, { Component } from 'react'
 import { Navbar, Nav } from 'react-bootstrap'
-export default class Header extends Component {
+import { connect } from 'react-redux'
+class Header extends Component {
     render() {
         return (
             <div>
-                <Navbar bg="dark" variant="dark" cla>
+                <Navbar bg="dark" variant="dark">
                     <Navbar.Brand href="#home">
                         <img
                             alt="app logo"
@@ -23,7 +24,7 @@ export default class Header extends Component {
                     </Navbar.Collapse>
                     <Navbar.Collapse className="justify-content-end" variant="dark">
                         <Navbar.Text>
-                            Authed
+                            {this.props.authedUser}
                         </Navbar.Text>
                         {' '}
                         <img
@@ -40,3 +41,11 @@ export default class Header extends Component {
         )
     }
 }
+
+function mapStateToProps({ authedUser }) {
+    return {
+        authedUser,
+    }
+}
+
+export default connect(mapStateToProps)(Header)
