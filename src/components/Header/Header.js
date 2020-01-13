@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { Navbar, Nav, Image } from 'react-bootstrap'
 import { connect } from 'react-redux'
+import { setAuthedUser } from "../../actions/authedUser"
 class Header extends Component {
     render() {
         return (
@@ -27,7 +28,7 @@ class Header extends Component {
                             {this.props.authedUser}
                         </Navbar.Text>
                         <Image src={this.props.avatar} alt="profile pic" roundedCircle width="30px" />
-                        <Nav.Link href="#logout">Logout</Nav.Link>
+                        <Nav.Link href="#logout" onClick={() => { this.props.setAuthedUser(null) }}>Logout</Nav.Link>
                     </Navbar.Collapse>
                 </Navbar>
             </div>
@@ -43,4 +44,12 @@ function mapStateToProps({ authedUser, users }) {
     }
 }
 
-export default connect(mapStateToProps)(Header)
+function mapDispatchToProps(dispatch) {
+    return {
+        setAuthedUser: (id) => {
+            dispatch(setAuthedUser(id))
+        }
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Header)
