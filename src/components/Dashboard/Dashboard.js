@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import Poll from '../Poll/Poll'
 import { Container, Row, Col, ButtonGroup, ToggleButton } from 'react-bootstrap'
+import Header from '../Header/Header'
 
 class Dashboard extends Component {
     handleChange = (event) => {
@@ -9,6 +10,7 @@ class Dashboard extends Component {
     render() {
         return (
             <Container>
+                <Header></Header>
                 <Row>
                     <Col style={{ margin: "10px" }}>
                         <ButtonGroup toggle onChange={this.handleChange}>

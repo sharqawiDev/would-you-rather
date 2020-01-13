@@ -2,24 +2,33 @@ import React, { Component } from 'react';
 import './App.css';
 import Login from "./components/Login/Login"
 import { connect } from 'react-redux'
-import { handleInitialData } from './actions/shared'
-import Header from './components/Header/Header';
-import Poll from './components/Poll/Poll';
+import { setAuthedUser } from './actions/authedUser'
 import Dashboard from './components/Dashboard/Dashboard';
 
 class App extends Component {
   componentDidMount() {
-    this.props.dispatch((handleInitialData()))
+    const AUTHED = null;
+    this.props.dispatch((setAuthedUser(AUTHED)))
   }
   render() {
     return (
-      <div className="App" >
-        <Header />
-        <Dashboard />
+      <div className="App">
+        {this.props.authedUser === null
+          ? <Login />
+          : <Dashboard />
+        }
       </div>
     );
   }
 
 }
 
-export default connect()(App)
+function mapStateToProps({ authedUser }) {
+  return {
+    authedUser,
+    loading: authedUser === null
+  }
+}
+
+export default connect(mapStateToProps)(App)
+
