@@ -1,15 +1,18 @@
 import React, { Component } from 'react'
 import { Card, ListGroup } from "react-bootstrap"
-export default class Poll extends Component {
+import { connect } from 'react-redux'
+class Poll extends Component {
     render() {
+        const { question } = this.props
+        const { optionOne, optionTwo } = question
         return (
             <div>
                 <Card>
                     <Card.Title>Would You Rather?</Card.Title>
                     <Card.Body>
                         <ListGroup variant="flush">
-                            <ListGroup.Item>Do This</ListGroup.Item>
-                            <ListGroup.Item>Do That</ListGroup.Item>
+                            <ListGroup.Item>{optionOne.text}</ListGroup.Item>
+                            <ListGroup.Item>{optionTwo.text}</ListGroup.Item>
                         </ListGroup>
                     </Card.Body>
                 </Card>
@@ -17,3 +20,14 @@ export default class Poll extends Component {
         )
     }
 }
+
+function mapStateToProps({ authedUser, questions }, { id }) {
+    const question = questions[id]
+
+    return {
+        authedUser,
+        question,
+    }
+}
+
+export default connect(mapStateToProps)(Poll)
