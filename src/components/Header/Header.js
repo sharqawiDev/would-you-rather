@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Navbar, Nav, Image } from 'react-bootstrap'
+import { Navbar, Nav } from 'react-bootstrap'
 export default class Header extends Component {
     render() {
         return (

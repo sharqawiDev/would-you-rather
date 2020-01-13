@@ -5,6 +5,7 @@ import { connect } from 'react-redux'
 import { handleInitialData } from './actions/shared'
 import Header from './components/Header/Header';
 import Poll from './components/Poll/Poll';
+import Dashboard from './components/Dashboard/Dashboard';
 
 class App extends Component {
   componentDidMount() {
@@ -13,7 +14,7 @@ class App extends Component {
   render() {
     return (
       <div className="App" >
-        <Poll />
+        <Dashboard />
       </div>
     );
   }
