@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Navbar, Nav, Image } from 'react-bootstrap'
+import { Navbar, Image } from 'react-bootstrap'
 import { connect } from 'react-redux'
 import { NavLink } from 'react-router-dom'
 import { setAuthedUser } from "../../actions/authedUser"
