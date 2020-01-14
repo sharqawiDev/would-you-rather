@@ -8,8 +8,8 @@ class Poll extends Component {
         const { optionOne, optionTwo } = question
         return (
             <div>
-                <Card>
-                    <Link to={`/questions/${id}`}>
+                <Link to={`/questions/${id}`}>
+                    <Card>
                         <Card.Title>Would You Rather?</Card.Title>
                         <Card.Body>
                             <ListGroup variant="flush">
@@ -17,9 +17,8 @@ class Poll extends Component {
                                 <ListGroup.Item>{optionTwo.text}</ListGroup.Item>
                             </ListGroup>
                         </Card.Body>
-                    </Link>
-
-                </Card>
+                    </Card>
+                </Link>
             </div>
         )
     }

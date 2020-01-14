@@ -9,7 +9,7 @@ class Header extends Component {
             <div>
                 <Navbar bg="dark" variant="dark">
                     <NavLink exact to='/'>
-                        <Navbar.Brand href="#home">
+                        <Navbar.Brand>
                             <img
                                 alt="app logo"
                                 src={require('./icon.png')}
@@ -23,8 +23,8 @@ class Header extends Component {
 
                     <Navbar.Collapse id="basic-navbar-nav">
 
-                        <NavLink exact to="/leaderboard">Leaderboard</NavLink>
-                        <NavLink exact to="/add">New Poll</NavLink>
+                        <NavLink exact to="/leaderboard" style={{ marginRight: "10px" }}>Leaderboard</NavLink>
+                        <NavLink exact to="/add" >New Poll</NavLink>
                         {/* <Nav.Link href="#link">New Poll</Nav.Link> */}
 
                     </Navbar.Collapse>
@@ -32,8 +32,10 @@ class Header extends Component {
                         <Navbar.Text style={{ marginRight: "10px" }}>
                             {this.props.authedUser}
                         </Navbar.Text>
-                        <Image src={this.props.avatar} alt="profile pic" roundedCircle width="30px" />
-                        <Nav.Link href="#logout" onClick={() => { this.props.setAuthedUser(null) }}>Logout</Nav.Link>
+                        <Image src={this.props.avatar} alt="profile pic" roundedCircle width="30px"
+                            style={{ marginRight: "10px" }}
+                        />
+                        <NavLink exact to="/" onClick={() => { this.props.setAuthedUser(null) }}>Logout</NavLink>
                     </Navbar.Collapse>
                 </Navbar>
             </div>
