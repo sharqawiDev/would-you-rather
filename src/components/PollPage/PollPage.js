@@ -3,13 +3,16 @@ import { connect } from 'react-redux'
 import {
     Container, Row, Col, Card,
     ListGroup, Jumbotron,
-    Form, Button, Alert
+    Form, Button, Alert,
+    Image
 } from "react-bootstrap"
+import { timestampToDate } from '../../utils/api'
 import Header from '../Header/Header'
 
 class PollPage extends Component {
     render() {
-        const { optionOne, optionTwo } = this.props.question
+        const { avatar, author } = this.props
+        const { optionOne, optionTwo, timestamp } = this.props.question
         return (
             <Container>
                 <Header />
@@ -17,9 +20,19 @@ class PollPage extends Component {
                     <Col xs={6}>
                         <Jumbotron>
                             <Card>
-                                <Card.Title style={{ margin: "10px 0 0 0" }}>
+                                <Card.Title style={{ margin: "10px 0 10px 0" }}>
                                     Would You Rather?
                             </Card.Title>
+                                <Container>
+                                    <Row className="justify-content-md-center">
+                                        <Col>
+                                            <Image src={avatar} alt="question author" roundedCircle width="30px"
+                                            />
+                                            <h6>{author}</h6>
+                                            <span>{timestampToDate(timestamp)}</span>
+                                        </Col>
+                                    </Row>
+                                </Container>
                                 <hr />
                                 <Form>
                                     <Card.Body>
@@ -47,14 +60,17 @@ class PollPage extends Component {
     }
 }
 
-function mapStateToProps({ authedUser, questions, users }, props) {
-    const { question_id } = props.match.params
-    const question = questions[question_id]
+function mapStateToProps({ questions, users }, props) {
+    const { question_id } = props.match.params;
+    const question = questions[question_id];
+    const avatar = users[question.author].avatarURL;
+    const author = question.author;
 
     return {
+        avatar,
+        author,
         question_id,
         question,
-        authedUser,
     }
 }
 
