@@ -7,6 +7,7 @@ import LoadingBar from 'react-redux-loading'
 import { handleInitialUsers } from './actions/shared'
 import Dashboard from './components/Dashboard/Dashboard';
 import PollPage from './components/PollPage/PollPage';
+import PageNotFound from './components/PageNotFound/PageNotFound';
 
 class App extends Component {
   componentDidMount() {
@@ -18,19 +19,20 @@ class App extends Component {
         <Fragment>
           <LoadingBar />
           <div className="App">
-
-            {
-              this.props.authedUser === null
-                ? <Route path='/' exact component={Login} />
-                :
-                <Switch>
-                  <Route path="/" exact component={Dashboard} />
-                  <Route path='/questions/:question_id' component={PollPage} />
-                  <Route path='/add' exact component={null} />
-                  <Route path='/leaderboard' exact component={null} />
-                  {/* <Route component={null} /> PageNotFound */}
-                </Switch>
-            }
+            <Switch>
+              {
+                this.props.authedUser === null
+                  ? <Route path='/' exact component={Login} />
+                  :
+                  <Fragment>
+                    <Route path="/" exact component={Dashboard} />
+                    <Route path='/questions/:question_id' component={PollPage} />
+                    <Route path='/add' exact component={null} />
+                    <Route path='/leaderboard' exact component={null} />
+                  </Fragment>
+              }
+              <Route component={PageNotFound} />
+            </Switch>
           </div>
         </Fragment>
       </Router>
