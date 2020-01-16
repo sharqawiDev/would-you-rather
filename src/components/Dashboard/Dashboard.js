@@ -7,7 +7,7 @@ import Header from '../Header/Header'
 
 class Dashboard extends Component {
     state = {
-        showAnswered: true
+        showAnswered: false
     }
     componentDidMount() {
         this.props.dispatch(handleInitialQuestions())
