@@ -25,7 +25,6 @@ class Header extends Component {
 
                         <NavLink exact to="/leaderboard" style={{ marginRight: "10px" }}>Leaderboard</NavLink>
                         <NavLink exact to="/add" >New Poll</NavLink>
-                        {/* <Nav.Link href="#link">New Poll</Nav.Link> */}
 
                     </Navbar.Collapse>
                     <Navbar.Collapse className="justify-content-end" variant="dark">

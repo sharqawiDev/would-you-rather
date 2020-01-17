@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { Component, Fragment } from 'react'
 import { connect } from 'react-redux'
 import { handleInitialQuestions } from "../../actions/shared"
 import Poll from '../Poll/Poll'
@@ -18,37 +18,41 @@ class Dashboard extends Component {
             ? ["Answered", "success"]
             : ["Unanswered", "danger"];
         return (
-            <Container>
+            <Fragment>
                 <Header />
-                <Row>
-                    <Col style={{ margin: "10px" }}>
-                        <ButtonGroup toggle onChange={() => {
-                            this.setState(prevState => ({
-                                showAnswered: !prevState.showAnswered
-                            }))
-                        }}>
-                            <ToggleButton type="radio" name="tab" value={value} variant={variant}>
-                                {value}
-                            </ToggleButton>
-                        </ButtonGroup>
-                    </Col>
-                </Row>
-                <Row>
-                    {
-                        this.state.showAnswered
-                            ? answeredQuestions.map((id) => (
-                                <Col md={4} style={{ marginBottom: "10px" }} key={id}>
-                                    <Poll key={id} id={id} />
-                                </Col>
-                            ))
-                            : unansweredQuestions.map((id) => (
-                                <Col md={4} style={{ marginBottom: "10px" }} key={id}>
-                                    <Poll key={id} id={id} />
-                                </Col>
-                            ))
-                    }
-                </Row>
-            </Container>
+                <Container>
+
+                    <Row>
+                        <Col style={{ margin: "10px" }}>
+                            <ButtonGroup toggle onChange={() => {
+                                this.setState(prevState => ({
+                                    showAnswered: !prevState.showAnswered
+                                }))
+                            }}>
+                                <ToggleButton type="radio" name="tab" value={value} variant={variant}>
+                                    {value}
+                                </ToggleButton>
+                            </ButtonGroup>
+                        </Col>
+                    </Row>
+                    <Row>
+                        {
+                            this.state.showAnswered
+                                ? answeredQuestions.map((id) => (
+                                    <Col md={4} style={{ marginBottom: "10px" }} key={id}>
+                                        <Poll key={id} id={id} />
+                                    </Col>
+                                ))
+                                : unansweredQuestions.map((id) => (
+                                    <Col md={4} style={{ marginBottom: "10px" }} key={id}>
+                                        <Poll key={id} id={id} />
+                                    </Col>
+                                ))
+                        }
+                    </Row>
+                </Container>
+            </Fragment>
+
         )
     }
 }

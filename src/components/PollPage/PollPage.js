@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { Component, Fragment } from 'react'
 import { connect } from 'react-redux'
 import {
     Container, Row, Col, Card,
@@ -47,70 +47,74 @@ class PollPage extends Component {
         const selectedAnswer = this.state.selectedAnswer;
         const disabledVal = this.state.selectedAnswer ? true : false;
         return (
-            <Container>
+            <Fragment>
                 <Header />
-                <Row className="justify-content-md-center">
-                    <Col xs={6}>
-                        <Jumbotron>
-                            <Card>
-                                <Card.Title style={{ margin: "10px 0 10px 0" }}>
-                                    Would You Rather?
-                            </Card.Title>
-                                <Container>
-                                    <Row className="justify-content-md-center">
-                                        <Col>
-                                            <Image src={avatar} alt="question author" roundedCircle width="30px"
-                                            />
-                                            <h6>{author}</h6>
-                                            <span>{timestampToDate(timestamp)}</span>
-                                        </Col>
-                                    </Row>
-                                </Container>
-                                <hr />
-                                <Form onSubmit={this.submitAnswer}>
-                                    <Card.Body>
-                                        <ListGroup variant="flush">
-                                            {[optionOne, optionTwo].map(option => {
-                                                const votes = option.votes;
-                                                const percentage = ((votes.length / Object.keys(users).length) * 100).toFixed(2);
-                                                const value = ["optionOne", "optionTwo"][[optionOne, optionTwo].indexOf(option)]
-                                                return (
-                                                    <div key={option.text} style={{ marginBottom: "10px" }}>
-                                                        <Alert variant="dark" style={{ marginBottom: 0 }}>
-                                                            <Form.Check
-                                                                required
-                                                                disabled={disabledVal}
-                                                                type="radio"
-                                                                style={{ display: "inline" }}
-                                                                label={option.text}
-                                                                name={this.props.question.id}
-                                                                value={value}
-                                                            />
-                                                            {
-                                                                votes.includes(authedUser)
-                                                                && <FaCheck style={{ marginLeft: "10px" }} />
-                                                            }
-                                                        </Alert>
-                                                        {selectedAnswer && (<ProgressBar
-                                                            now={percentage}
-                                                            label={`${votes.length} votes (${percentage}%)`} />)}
+                <Container>
 
-                                                    </div>
-                                                )
-                                            })}
-                                        </ListGroup>
-                                    </Card.Body>
-                                    <Button
-                                        type="submit"
-                                        style={{ margin: "0 0 10px 0" }}
-                                        disabled={disabledVal}
-                                    >Answer</Button>
-                                </Form>
-                            </Card>
-                        </Jumbotron>
-                    </Col>
-                </Row>
-            </Container>
+                    <Row className="justify-content-md-center">
+                        <Col xs={6}>
+                            <Jumbotron>
+                                <Card>
+                                    <Card.Title style={{ margin: "10px 0 10px 0" }}>
+                                        Would You Rather?
+                            </Card.Title>
+                                    <Container>
+                                        <Row className="justify-content-md-center">
+                                            <Col>
+                                                <Image src={avatar} alt="question author" roundedCircle width="30px"
+                                                />
+                                                <h6>{author}</h6>
+                                                <span>{timestampToDate(timestamp)}</span>
+                                            </Col>
+                                        </Row>
+                                    </Container>
+                                    <hr />
+                                    <Form onSubmit={this.submitAnswer}>
+                                        <Card.Body>
+                                            <ListGroup variant="flush">
+                                                {[optionOne, optionTwo].map(option => {
+                                                    const votes = option.votes;
+                                                    const percentage = ((votes.length / Object.keys(users).length) * 100).toFixed(2);
+                                                    const value = ["optionOne", "optionTwo"][[optionOne, optionTwo].indexOf(option)]
+                                                    return (
+                                                        <div key={option.text} style={{ marginBottom: "10px" }}>
+                                                            <Alert variant="dark" style={{ marginBottom: 0 }}>
+                                                                <Form.Check
+                                                                    required
+                                                                    disabled={disabledVal}
+                                                                    type="radio"
+                                                                    style={{ display: "inline" }}
+                                                                    label={option.text}
+                                                                    name={this.props.question.id}
+                                                                    value={value}
+                                                                />
+                                                                {
+                                                                    votes.includes(authedUser)
+                                                                    && <FaCheck style={{ marginLeft: "10px" }} />
+                                                                }
+                                                            </Alert>
+                                                            {selectedAnswer && (<ProgressBar
+                                                                now={percentage}
+                                                                label={`${votes.length} votes (${percentage}%)`} />)}
+
+                                                        </div>
+                                                    )
+                                                })}
+                                            </ListGroup>
+                                        </Card.Body>
+                                        <Button
+                                            type="submit"
+                                            style={{ margin: "0 0 10px 0" }}
+                                            disabled={disabledVal}
+                                        >Answer</Button>
+                                    </Form>
+                                </Card>
+                            </Jumbotron>
+                        </Col>
+                    </Row>
+                </Container>
+            </Fragment>
+
         )
     }
 }
