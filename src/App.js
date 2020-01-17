@@ -9,6 +9,7 @@ import Dashboard from './components/Dashboard/Dashboard';
 import PollPage from './components/PollPage/PollPage';
 import PageNotFound from './components/PageNotFound/PageNotFound';
 import AddPoll from './components/AddPoll/AddPoll';
+import Leaderboard from './components/Leaderboard/Leaderboard';
 
 class App extends Component {
   componentDidMount() {
@@ -29,7 +30,7 @@ class App extends Component {
                     <Route path="/" exact component={Dashboard} />
                     <Route path='/questions/:question_id' component={PollPage} />
                     <Route path='/add' exact component={AddPoll} />
-                    <Route path='/leaderboard' exact component={null} />
+                    <Route path='/leaderboard' exact component={Leaderboard} />
                   </Fragment>
               }
               <Route component={PageNotFound} />
