@@ -8,6 +8,7 @@ import { handleInitialUsers } from './actions/shared'
 import Dashboard from './components/Dashboard/Dashboard';
 import PollPage from './components/PollPage/PollPage';
 import PageNotFound from './components/PageNotFound/PageNotFound';
+import AddPoll from './components/AddPoll/AddPoll';
 
 class App extends Component {
   componentDidMount() {
@@ -27,7 +28,7 @@ class App extends Component {
                   <Fragment>
                     <Route path="/" exact component={Dashboard} />
                     <Route path='/questions/:question_id' component={PollPage} />
-                    <Route path='/add' exact component={null} />
+                    <Route path='/add' exact component={AddPoll} />
                     <Route path='/leaderboard' exact component={null} />
                   </Fragment>
               }

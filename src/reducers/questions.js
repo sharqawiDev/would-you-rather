@@ -26,7 +26,7 @@ export default function questions(state = {}, action) {
         case ADD_QUESTION:
             return {
                 ...state,
-                [action.poll.id]: action.poll
+                [action.question.id]: action.question
             }
         default:
             return state
