@@ -11,6 +11,7 @@ import { timestampToDate } from '../../utils/api'
 import { handleSaveQuestionAnswer } from '../../actions/shared'
 import Header from '../Header/Header'
 import { FaCheck } from 'react-icons/fa';
+import { Redirect } from 'react-router-dom'
 
 
 class PollPage extends Component {
@@ -42,11 +43,13 @@ class PollPage extends Component {
             avatar, author,
             optionOne, optionTwo,
             timestamp,
-            authedUser, users
+            authedUser, users,
+            questionNotFound
         } = this.props;
         const selectedAnswer = this.state.selectedAnswer;
         const disabledVal = this.state.selectedAnswer ? true : false;
-        return (
+
+        return !questionNotFound ? (
             <Fragment>
                 <Header />
                 <Container>
@@ -57,7 +60,7 @@ class PollPage extends Component {
                                 <Card>
                                     <Card.Title style={{ margin: "10px 0 10px 0" }}>
                                         Would You Rather?
-                            </Card.Title>
+                                    </Card.Title>
                                     <Container>
                                         <Row className="justify-content-md-center">
                                             <Col>
@@ -115,15 +118,20 @@ class PollPage extends Component {
                 </Container>
             </Fragment>
 
-        )
+        ) : <Redirect to="/questionNotFound" />
     }
 }
 
 function mapStateToProps({ authedUser, questions, users }, props) {
     const { question_id } = props.match.params;
     const question = questions[question_id];
-    const avatar = users[question.author].avatarURL;
+    if (!question) {
+        return {
+            questionNotFound: true
+        }
+    }
     const author = question.author;
+    const avatar = users[question.author].avatarURL;
     const optionOne = question.optionOne;
     const optionTwo = question.optionTwo;
     const { timestamp } = question;

@@ -14,6 +14,7 @@ class Login extends Component {
         const { selectedUser } = this.state
         const { setAuthedUser } = this.props
         setAuthedUser(selectedUser)
+        this.props.history.push()
     }
 
     changeSelectedUser = (selectedUser) => this.setState({ selectedUser })
